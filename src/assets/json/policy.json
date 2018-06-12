@@ -1,0 +1,198 @@
+// {
+// "data":[
+//     {
+//       "policyYear": 2018,
+//       "policyName": "nameOfPolicy",
+//       "roles": [
+//         {"roleId":1,"roleName":"Associate"},
+//         {"roleId":2,"roleName":"Trainee"}
+//       ],
+//       "timeLine": "monthly",
+//       "leaveDayCount": [
+//         {
+//           "leaveTypeId":1,
+//           "LeaveType": "Sick Leave",
+//           "days": 1
+//         },
+//         {
+//           "leaveTypeId":2,
+//           "LeaveType": "Earned Leave",
+//           "days": 1
+//         }
+//       ],
+//       "createdDate": 1519217542,
+//       "modifiedDate": 1519217542,
+//       "createdBy": "name1",
+//       "modifiedBy": "name2",
+//       "isEnabled":"Y"
+//     },
+//      {
+//       "policyYear": 2019,
+//       "policyName": "nameOfPolicy",
+//       "roles": [
+//         {"roleId":1,"roleName":"Associate"},
+//         {"roleId":2,"roleName":"Trainee"}
+//       ],
+//       "timeLine": "monthly",
+//       "leaveDayCount": [
+//         {
+//           "leaveTypeId":1,
+//           "LeaveType": "Sick Leave",
+//           "days": 1
+//         },
+//         {
+//           "leaveTypeId":2,
+//           "LeaveType": "Earned Leave",
+//           "days": 1
+//         }
+//       ],
+//       "createdDate": 1519217542,
+//       "modifiedDate": 1519217542,
+//       "createdBy": "name1",
+//       "modifiedBy": "name2",
+//       "isEnabled":"Y"
+//     }
+//   ]
+// }
+
+{
+  "result": [
+    {
+      "id": 2,
+      "user": {
+        "id": 2,
+        "username": "a",
+        "password": "a",
+        "enabled": false,
+        "employee": {
+          "id": 2,
+          "name": "i",
+          "dob": 1474309800000,
+          "badgeNumber": "HW001",
+          "emailId": "xyz",
+          "createdBy": "xyz",
+          "createdDate": 1474309800000,
+          "modifiedBy": "xyz",
+          "modifiedDate": 1474309800000,
+          "mobileNumber": "12",
+          "address": "xyz",
+          "enabled": false
+        },
+        "role": {
+          "id": 2,
+          "roleType": "manager",
+          "createdBy": "string",
+          "createdDate": "2018-02-26",
+          "modifiedBy": null,
+          "modifiedDate": null,
+          "enabled": true
+        },
+        "authId": "a",
+        "authorised": false
+      },
+      "policyMaster": {
+        "id": 1,
+        "name": "string",
+        "year": "string",
+        "enabled": true,
+        "createdBy": "string",
+        "createdDate": 1519629844000,
+        "modifiedBy": null,
+        "modifiedDate": 1519629844000,
+        "leavePolicyType": "MONTHLY"
+      },
+      "leaveType": {
+        "id": 1,
+        "name": "string",
+        "createdBy": "string",
+        "createdDate": 1519629805000,
+        "modifiedBy": "Rakshitha",
+        "modifiedDate": 1519644740000,
+        "enabled": false
+      },
+      "leaveStartDate": 1519629699000,
+      "leaveEndDate": 1519888899000,
+      "appliedNoOfDays": 3,
+      "userComments": "string",
+      "employee": {
+        "id": 2,
+        "name": "i",
+        "dob": 1474309800000,
+        "badgeNumber": "HW001",
+        "emailId": "xyz",
+        "createdBy": "xyz",
+        "createdDate": 1474309800000,
+        "modifiedBy": "xyz",
+        "modifiedDate": 1474309800000,
+        "mobileNumber": "12",
+        "address": "xyz",
+        "enabled": false
+      },
+      "managerComments": null,
+      "status": "pending",
+      "createdDate": 1519630384000,
+      "modifiedDate": null
+    },
+    {
+      "id": 3,
+      "user": {
+        "id": 2,
+        "username": "a",
+        "password": "a",
+        "enabled": false,
+        "employee": {
+          "id": 2,
+          "name": "i",
+          "dob": 1474309800000,
+          "badgeNumber": "HW001",
+          "emailId": "xyz",
+          "createdBy": "xyz",
+          "createdDate": 1474309800000,
+          "modifiedBy": "xyz",
+          "modifiedDate": 1474309800000,
+          "mobileNumber": "12",
+          "address": "xyz",
+          "enabled": false
+        },
+        "role": {
+          "id": 2,
+          "roleType": "manager",
+          "createdBy": "string",
+          "createdDate": "2018-02-26",
+          "modifiedBy": null,
+          "modifiedDate": null,
+          "enabled": true
+        },
+        "authId": "a",
+        "authorised": false
+      },
+      "policyMaster": null,
+      "leaveType": null,
+      "leaveStartDate": 1519633986000,
+      "leaveEndDate": 1519633986000,
+      "appliedNoOfDays": 0,
+      "userComments": "string",
+      "employee": {
+        "id": 2,
+        "name": "i",
+        "dob": 1474309800000,
+        "badgeNumber": "HW001",
+        "emailId": "xyz",
+        "createdBy": "xyz",
+        "createdDate": 1474309800000,
+        "modifiedBy": "xyz",
+        "modifiedDate": 1474309800000,
+        "mobileNumber": "12",
+        "address": "xyz",
+        "enabled": false
+      },
+      "managerComments": null,
+      "status": "pending",
+      "createdDate": 1519634234000,
+      "modifiedDate": null
+    }
+  ],
+  "success": true,
+  "statusMessage": "leaves Fetched Successfully",
+  "statusCode": 200
+}

@@ -1,0 +1,26 @@
+[
+    {"roleName":"Trainee",
+      "roleId":1,
+      "isChecked":"Y",
+      "createdDate":1519217542,
+      "modifiedDate":1519217542,
+      "createdBy":"name1",
+      "modifiedBy":"name2"
+    },
+     {"role":"Manager",
+      "roleId":2,
+      "isChecked":"N",
+      "createdDate":1519217542,
+      "modifiedDate":1519217542,
+      "createdBy":"name1",
+      "modifiedBy":"name2"
+    },
+       {"role":"Admin",
+      "roleId":3,
+      "isChecked":"Y",
+      "createdDate":1519217542,
+      "modifiedDate":1519217542,
+      "createdBy":"name1",
+      "modifiedBy":"name2"
+    }
+  ]

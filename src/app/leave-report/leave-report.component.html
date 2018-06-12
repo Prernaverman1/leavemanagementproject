@@ -1,0 +1,15 @@
+
+<div class="row">
+            <div class="col-md-1">
+              <p style="margin-top:10px;">Select Date:</p>
+            </div>
+            <div class="col-md-3">
+                <input class="lsInput" [owlDateTimeTrigger]="dt12" [owlDateTimeFilter]="" [owlDateTime]="dt12" [selectMode]="'range'"
+        [min]="" placeholder="DD-MM-YYYY" name="edit" [(ngModel)]="myMoments1" (dateTimeChange)="changeDate1(myMoments1)"> 
+      <owl-date-time [pickerType]="" #dt12></owl-date-time>
+            </div>
+             <div class="col-md-1"></div>
+             <div class="col-md-2">
+               <button (click)="getLeaveStatusByDate1()">Export</button>
+             </div>
+          </div>

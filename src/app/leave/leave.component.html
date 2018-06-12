@@ -1,0 +1,246 @@
+<div class="mainContent">
+  <tabset #staticTabs [justified]="true">
+    <tab heading="Pending Approvals ">
+      <div class="menuContent leaveInfo" >
+        <div class="row text-center lmsRowHeader">
+          <div class="col-md-10">
+            <div class="row">
+              <div class="col-md-2">
+                Name
+              </div>
+              <div class="col-md-2">
+                Leave Type
+              </div>
+              <div class="col-md-2">
+               Start Date
+              </div>
+              <div class="col-md-2">
+                End Date
+              </div>
+              <div class="col-md-2">
+                No of Days
+              </div>
+              <div class="col-md-2">
+                Comments
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div>
+              Status
+            </div>
+          </div>
+        </div>
+         <!-- <div class="row">
+        <div class="col-md-1">
+          <p style="margin-top:10px;">Search</p>
+        </div>
+        <div class="col-md-4">
+            <input class="form-control tableInput" type="text" name="search" [(ngModel)]="filter">   
+        </div>
+         <div class="col-md-6"></div>
+      </div> -->
+         <div *ngIf="this.pendingList?.length == 0">No Data Found</div>
+        <div class="row text-center lmsRowContent" [class.color]="i==leaves.leaveApplicationId" *ngFor="let leaves of pendingList | filter:filter;let i " >
+          <div class="col-md-10">
+            <div class="row">
+              <div class="col-md-2">
+                {{leaves.userName}}
+              </div>
+              <div class="col-md-2">
+                {{leaves.leaveTypeName}}
+              </div>
+              <div class="col-md-2">
+                <!-- 16/02/2018 - 16/02/2018 -->
+                {{leaves.startDate | date:'mediumDate'}}
+              </div>
+              <div class="col-md-2">
+                 {{leaves.endDate | date:'mediumDate'}}
+              </div>
+              <div class="col-md-2">
+                {{leaves.noOfDays}}
+              </div>
+              <div class="col-md-2">
+                {{leaves.employeeCommentSubmission}}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div>
+              <!-- <span >{{leaves.status}}</span> -->
+              <button  type="button" className="lmsButton" data-toggle="modal" data-target="#myModal" (click)="ApproveLeave(i,leaves.leaveApplicationId,leaves.reportingManagerId)">Approve</button>
+              <button  type="button" className="lmsButton" data-toggle="modal" data-target="#myModal1" (click)="RejectLeave(i,leaves.leaveApplicationId,leaves.reportingManagerId)">Reject</button>
+            </div>
+          </div>
+        </div>
+
+       <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+
+
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" #closeBtn1>&times;</button>
+                <h4 class="modal-title">Approve Leave</h4>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <span>Comments</span>
+                  </div>
+                  <div class="col-md-8">
+                    <textarea type="text" name="comments" [(ngModel)]="comments"></textarea>
+                  </div>
+                  <input type="button" value="Submit" class="buttonClass" #approveButton (click)="approveLeave()" />
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="modal fade" id="myModal1" role="dialog">
+          <div class="modal-dialog">
+
+
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" #closeBtn>&times;</button>
+                <h4 class="modal-title">Reject Leave</h4>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <span>Comments</span>
+                  </div>
+                  <div class="col-md-8">
+                    <textarea type="text" name="comments1" [(ngModel)]="comments1"></textarea>
+                  </div>
+                  <input type="button" value="Submit" class="buttonClass" #rejectButton (click)="rejectLeave()" />
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div> 
+
+
+      </div>
+
+      
+
+    </tab>
+    <!-- <tab class="cancel" heading="Cancellation Requests"><span class="cancelBadge badge badge-light">9</span>
+
+     
+    </tab> -->
+    <tab heading="History">
+      <div class="row filterRow">
+          <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 paddingzero">
+            <span>Select Date</span>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <input class="lsInput" [owlDateTimeTrigger]="dt11" [owlDateTimeFilter]="myFilter" [owlDateTime]="dt11" [selectMode]="'range'"
+        [min]="" placeholder="MM-DD-YYYY" name="edit" [(ngModel)]="myMoments" (dateTimeChange)="changeDate(myMoments)">
+      <owl-date-time [pickerType]="" #dt11></owl-date-time>
+      </div>
+      </div>
+       <div id="smartTable">
+        <ng2-smart-table [settings]="historySettings" [source]="historyData"></ng2-smart-table>
+      </div>
+    </tab>
+
+    <tab heading="Employee Leave Details">
+      <br/><br/>
+      <div class="row filterRow">
+          <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 paddingzero">
+            <!-- <span>Select Date</span> -->
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+           <!-- <input class="lsInput" [owlDateTimeTrigger]="dt12" [owlDateTimeFilter]="myFilter1" [owlDateTime]="dt12" [selectMode]="'range'"
+        [min]="" placeholder="MM-DD-YYYY" name="edit" [(ngModel)]="myMoments1" (dateTimeChange)="changeDate1(myMoments1)"> 
+      <owl-date-time [pickerType]="'calendar'" #dt12></owl-date-time>   -->
+      </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <button (click)="exportToExcelsheet($event)">Export</button>
+    </div>
+      </div>
+
+      <div class="wbMain">
+       
+        <!-- <div [hidden]="showLoading"><i class="fa fa-spinner fa-spin"></i></div> -->
+      <div class="row wbMain-rowhead">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 wbMain-rowVal">Employee Name</div>
+        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 wbMain-rowVal">Email Id</div>
+        <!-- <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 wbMain-rowVal">Mobile Number</div> -->
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 wbMain-rowVal">Role Name</div>
+        <!-- <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 wbMain-rowVal">Managers</div> -->
+        <div class="col-lg-2 col-md-1 col-sm-1 col-xs-1" *ngFor="let items of employeeSubdetails">
+          {{items}} (Cr-Co-Av-Ap-Ao)
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">LOP</div>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+      </div>
+      <div class="batchList">
+        <div class="row wbMain-row wbMain-row1"  *ngFor="let EmployeeDetails of employeeDetails;let i=index" >
+          <div class="batchlist__wrap" [class.wbMain-rowValActive]="testObject1['show_'+i]==false" >
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{EmployeeDetails.employeeName}}</div>
+            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">{{EmployeeDetails.emailId}}</div>
+            <!-- <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{EmployeeDetails.mobileNumber}}</div> -->
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" >{{EmployeeDetails.roleName}}</div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" *ngFor="let head of EmployeeDetails.leaveDetailsResponses">{{head.credited}}-{{head.consumed}}-<span *ngIf="head.available > 0 || head.available == 0 ">{{head.available}}</span><span *ngIf="head.available < 0">0</span>-{{head.applied}}-{{head.approved}}</div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" >{{EmployeeDetails.LOPVal}}</div>
+            <!-- <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{EmployeeDetails.reportingManagerName}}</div> -->
+            <!-- <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+              <i class="fa fa-plus expandButton cursorPointer batchName" aria-hidden="true" (click)="expand(i)" *ngIf="testObject1['show_'+i]"></i>
+              <i class="fa fa-minus expandButton cursorPointer batchName" aria-hidden="true" (click)="shrink(i)" *ngIf="!testObject1['show_'+i]"></i> 
+            </div> -->
+          </div>
+    
+    
+          <div class="paddingzero col-lg-12 col-md-12 col-sm-12 col-xs-12 policyRow" [hidden]="testObject1['show_'+i]">
+            <div class="row wbMain-Insiderow">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 wbMain-Insiderow1 paddingzero" *ngFor="let EmployeeDetails1 of EmployeeDetails.leaveDetailsResponses;let index1=index" [hidden]="testObject1['show_'+i]">{{EmployeeDetails1.leaveType}}
+                  <div class="row lbRow">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddingzero">
+                        Leave Credited
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddingzero borderLeft">
+                        Leaves Consumed
+                    </div>
+
+                  </div>
+                </div>
+                <!-- <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{TestCasesId}}</div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{TestCasesId}}</div>
+              <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{TestCasesId}}</div>
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">{{TestCasesId}}</div> -->
+             
+            </div>
+            <div class="row marginzero wbMain-Insiderow">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 valueDiv " *ngFor="let EmployeeDetails1 of EmployeeDetails.leaveDetailsResponses;let index1=index" [hidden]="testObject1['show_'+i]">
+                  <div class="row lbValue">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                      {{EmployeeDetails1.leavesCredited}}
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 borderLeft">
+                      {{EmployeeDetails1.leavesConsumed}}
+                    </div>
+
+                  </div>
+                </div>
+            </div>
+          </div>
+    
+    
+        </div>
+      </div>
+    </div>
+    
+      <div class="row footerRow text-right">Cr-Credited, Co-Consumed, Av-Available, Ap-Applied, Ao-Approved</div>
+     </tab>
+  </tabset>
+</div>

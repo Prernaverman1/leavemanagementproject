@@ -1,0 +1,635 @@
+<tabset #staticTabs [justified]="true">
+  <tab heading="Apply Leave">
+   
+    <div class="row applyRow">
+      <div class="col-md-7">
+   
+          <fieldset>
+            <legend>Apply Leave</legend>
+            <div class="row larow">
+              <div class="col-md-4">
+                <span>Leave Type</span>
+              </div>
+              <div class="col-md-8">
+              <div class="test">
+   
+              </div> 
+        <select class="leave" (click)="changeLeaveType(selectedItems1)" [(ngModel)]="selectedItems1">
+            <option [value]="undefined" [attr.selected]=true disabled>Select Leave</option> 
+  <option *ngFor="let c of dropdownList1" [ngValue]="c" >{{c.itemName}}</option>
+</select>
+                <!-- <angular2-multiselect name="dropdown" [data]="dropdownList1" [(ngModel)]="selectedItems1" [settings]="dropdownSettings1"
+                  (onSelect)="onItemSelect1($event)" (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)"
+                  (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect> -->
+              </div>
+            </div>
+
+
+          
+
+            <div class="row larow">
+              <div class="col-md-4">
+
+                <span>Date</span>
+
+              </div>
+              <div class="col-md-8">
+
+
+                <input class="lsInput" [owlDateTimeTrigger]="dt10" [owlDateTimeFilter]="myFilter"  [owlDateTime]="dt10" [selectMode]="'range'"
+                  [min]="" placeholder="MM-DD-YYYY" [formControl]="selectedMoment2"  (dateTimeChange)="changeDate(selectedMoment2)">
+                <owl-date-time [pickerType]="" #dt10></owl-date-time>
+
+
+                <!-- <ng-datepicker name="date" [(ngModel)]="date"></ng-datepicker> -->
+
+
+              </div>
+            </div>
+
+
+            <div class="row larow">
+              <div class="col-md-4">
+
+                 <span>Total No of Days</span> 
+
+              </div>
+              <div class="col-md-8">
+                   
+
+                <!-- <input class="lsInput" [owlDateTimeTrigger]="dt10"  [owlDateTime]="dt10"
+           [selectMode]="'range'" [min]="min" placeholder="MM-DD-YYYY">
+           <owl-date-time #dt10 [(ngModel)]="selectedMoments" (dateTimeChange)="changeDate(selectedMoments)"></owl-date-time>
+                -->
+                  <span *ngIf="this.noOfDays == 0">{{noOfDays}}</span>
+                 <span *ngIf="this.noOfDays > 0">{{noOfDays-this.holidayList.length}}</span> 
+
+
+              </div>
+            </div>
+            <div class="row larow">
+              <div class="col-md-4">
+                <span>Manager </span>
+
+              </div>
+              <div class="col-md-8">
+
+
+                <span>{{manager}}</span>
+
+
+
+              </div>
+            </div>
+            <div class="row larow textarearow">
+              <div class="col-md-4">
+
+                <span>Comments</span>
+              </div>
+              <div class="col-md-8">
+
+
+
+                <textarea type="text" name="comments" class="lsInput" [(ngModel)]="comments"></textarea>
+
+
+
+              </div>
+            </div>
+            <!-- <div class="row larow">
+ <div class="col-md-4">
+    <span>Upload Reports </span>
+ </div>
+ <div class="col-md-8">
+    
+    
+          <input type="file" name="file" class="lsInput" [(ngModel)]="File" />
+           
+  </div>
+</div> -->
+
+            <div class="row">
+              <input type="button" value="Submit"     (click)="applyLeave()" class="buttonClass text-center lsbutton" data-toggle="modal" data-target="#myModal4" />
+            </div>
+          </fieldset>
+      
+      </div>
+      <div class="col-md-5">
+        <accordion>
+    <accordion-group #group>
+      <div accordion-heading class="clearfix">
+       Holiday List<i class="pull-right fa fa-angle-down"
+       [ngClass]="{'fa-rotate-180': group?.isOpen}"></i>
+      </div>
+      <div>
+          <table class="nomargin">
+              <tr>
+                <th>Date</th>
+                <th>Holiday Name</th>
+              </tr>
+              <tr *ngFor="let holiday of holidayList">
+                <td>{{holiday.date}}</td>
+                <td>{{holiday.name}}</td>
+              </tr>
+            </table>
+      </div>
+    </accordion-group>
+  </accordion>
+
+  <!-- <accordion>
+      <accordion-group #group>
+        <div accordion-heading class="clearfix">
+         Leave Details<i class="pull-right fa fa-angle-down"
+         [ngClass]="{'fa-rotate-180': group?.isOpen}"></i>
+        </div>
+        <div style="overflow:auto;">
+              <table class="nomargin">
+                <tr>
+                  <th>Leave Name</th>
+                  <th>Leaves Credited</th>
+                   <th>Leaves Consumed</th>
+                   <th>Leaves Available</th>
+                   <th>Leaves Applied</th>
+                    <th>Leaves Approved</th>
+                    <th>LOP</th>
+                </tr>
+            
+                   <tr *ngFor="let Leavebalance of employeeLeaveBalance1">
+                  <td>{{Leavebalance.leaveType}}</td>
+                   <td>{{Leavebalance.credited | number}}</td>
+                  <td>{{Leavebalance.consumed | number }}</td>
+                   <td>{{Leavebalance.available | number}}</td>
+                    <td>{{Leavebalance.applied | number}}</td>
+                  <td>{{Leavebalance.approved | number}}</td> 
+                  <td>{{employeeLeaveBalance[0].LOPVal}}</td>
+                </tr>
+              </table>
+        </div>
+      </accordion-group>
+    </accordion> -->
+
+    
+
+      </div>
+    </div>
+
+    <!-- <br/><br/> -->
+
+    <div class="modal fade" id="myModal4" role="dialog" *ngIf="this.availableDays < this.noOfDays">
+        <div class="modal-dialog">
+          <div class="modal-content configModal">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" #closeBtn>&times;</button>
+              <h5 class="modal-title">Lop</h5>
+            </div>
+            <div class="modal-body">
+               <!-- <p>Your available leaves {{noOfDays}} are lesser than your applied leaves.Hence there would be loss of pay for remaining days.Do you wish to continue ?</p> -->
+               <p>Your available leaves are {{this.availableDays | number : '1.2-2'}} days.Your trying to applied leave for {{noOfDays-this.holidayList.length}} days.Hence there would be a loss of pay for {{(noOfDays-this.holidayList.length)-availableDays}} days.Do you wish to continue?</p>
+               <!-- <p>Your trying to applied leave for {{noOfDays}} days</p>
+               <p>Hence there would be a loss of pay for {{noOfDays-availableDays}} days</p>
+               <p>Do you wish to continue?</p> -->
+             <!-- {{noOfDays}}/{{availableDays}} -->
+               <div class="row">
+                      <div class="col-md-12">
+                          <div style="text-align:center">
+                              <button type="submit" #submitButton  (click)="applyLeave1()">Submit</button>
+                            </div>
+                      </div>
+                   </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <!-- <div class="loaderDiv" *ngIf="showLoading">
+        <i class="fa fa-spinner fa-spin loaderCenter loaderCenter1"></i>
+        <h6 class="loaderCenter">Please Wait</h6>
+      </div>  -->
+
+       <div class="row">
+    
+        <div class="col-md-12 nomargin1">
+          <legend>Leave Details</legend>
+          <!-- <h4>Leave Details</h4> -->
+           <table class="nomargin">
+                <tr>
+                  <th>Leave Name</th>
+                  <th>Leaves Credited</th>
+                   <th>Leaves Consumed</th>
+                   <th>Leaves Available</th>
+                   <th>Leaves Applied</th>
+                    <th>Leaves Approved</th>
+                     <th>LOP</th> 
+                </tr>
+                <tr *ngFor="let Leavebalance of employeeLeaveBalance1">
+                  <td>{{Leavebalance.leaveType}}</td>
+                   <td>{{Leavebalance.credited | number : '1.2-2'}}</td>
+                  <td>{{Leavebalance.consumed | number : '1.2-2' }}</td>
+                   <td *ngIf="Leavebalance.available > 0 || Leavebalance.available == 0 ">{{Leavebalance.available | number : '1.2-2'}}</td>
+                   <td *ngIf="Leavebalance.available < 0">0</td>
+                    <td>{{Leavebalance.applied | number : '1.2-2'}}</td>
+                  <td>{{Leavebalance.approved | number : '1.2-2'}}</td> 
+                  <!-- <td>{{employeeLeaveBalance[0].LOPVal | json}}</td> -->
+                  <td *ngIf="Leavebalance.available < 0">{{0+(-1*(Leavebalance.available)) | number : '1.2-2'}}</td>
+                  <td *ngIf="Leavebalance.available > 0 || Leavebalance.available == 0 ">0</td>
+
+                  
+                </tr>
+              </table>
+        </div>
+        <!-- <div class="col-md-1"></div> -->
+      </div> 
+      
+
+    <!-- <div class="row">
+      <div class="col-md-1">
+        <p style="margin-top:10px;">Search</p>
+      </div>
+      <div class="col-md-4">
+          <input class="form-control tableInput" type="text" name="search" [(ngModel)]="filter">   
+      </div>
+       <div class="col-md-6"></div>
+    </div> -->
+
+    <!-- <div class="row">
+      <div class="col-md-1"></div>
+        <div class="col-md-10">
+           <accordion>
+      <accordion-group #group>
+        <div accordion-heading class="clearfix">
+         Leave Details<i class="pull-right fa fa-angle-down"
+         [ngClass]="{'fa-rotate-180': group?.isOpen}"></i>
+        </div>
+        <div style="overflow:auto;">
+              <table class="nomargin">
+                <tr>
+                  <th>Leave Name</th>
+                  <th>Leaves Credited</th>
+                   <th>Leaves Consumed</th>
+                   <th>Leaves Available</th>
+                   <th>Leaves Applied</th>
+                    <th>Leaves Approved</th>
+                    <th>LOP</th>
+                </tr>
+                <tr *ngFor="let Leavebalance of employeeLeaveBalance[0].leaveDetailsResponses">
+                  <td>{{Leavebalance.leaveType}}</td>
+                   <td>{{Leavebalance.credited | number}}</td>
+                  <td>{{Leavebalance.consumed | number }}</td>
+                   <td>{{Leavebalance.available | number}}</td>
+                    <td>{{Leavebalance.applied | number}}</td>
+                  <td>{{Leavebalance.approved | number}}</td> 
+                  <td>{{employeeLeaveBalance[0].LOPVal | json}}</td>
+                </tr>
+              </table>
+        </div>
+      </accordion-group>
+    </accordion>
+        </div>
+          <div class="col-md-1"></div>
+    </div> -->
+
+    <div class="menuContent leaveInfo">
+      <div class="row text-center lmsRowHeader">
+        <div class="col-md-10">
+          <div class="row">
+            <div class="col-md-2">
+              Leave Type
+            </div>
+            <div class="col-md-2">
+              Dates
+            </div>
+            <div class="col-md-2">
+              No of Days
+            </div>
+            <div class="col-md-2">
+              Comments
+            </div>
+              <div class="col-md-2">
+              Reporting Manager
+            </div> 
+            <div class="col-md-2">
+              Status
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div>
+            Actions
+          </div>
+        </div>
+      </div>
+          <div *ngIf="this.leaveRequestList.length == 0">No Data Found</div>
+      <div class="row text-center lmsRowContent" *ngFor="let leaves of this.leaveRequestList | filter:filter">
+                 
+        <div class="col-md-10">
+          <div class="row">
+            <!-- <div class="col-md-2">
+              {{leaves.userId}}
+            </div> -->
+            <div class="col-md-2">
+              {{leaves.leaveTypeName}}
+            </div>
+            <div class="col-md-2">
+              {{leaves.startDate | date:'mediumDate'}} - {{leaves.endDate | date:'mediumDate'}} </div>
+            <div class="col-md-2">
+              <!-- 16/02/2018 - 16/02/2018 -->
+              {{leaves.noOfDays}}
+            </div>
+            <div class="col-md-2">
+              {{leaves.employeeCommentSubmission}}
+            </div>
+            <div class="col-md-2">
+              {{leaves.reportingManagerName}}
+            </div>
+            <div class="col-md-2">
+              {{leaves.status}}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div>
+            <button type="button" className="lmsButton" data-toggle="modal" data-target="#myModal1" *ngIf="leaves.status == 'pending'" (click)="getLeaveData(leaves.leaveApplicationId,leaves.startDate,leaves.endDate,leaves.employeeCommentSubmission,leaves.leaveTypeName,leaves.noOfDays,leaves.userId)">Edit</button>
+            <button type="button" className="lmsButton" data-toggle="modal" data-target="#myModal" *ngIf="leaves.status == 'pending'" (click)="getLeaveData(leaves.leaveApplicationId,leaves.startDate,leaves.endDate,leaves.employeeCommentSubmission,leaves.leaveTypeName,leaves.noOfDays)">Cancel</button>
+            <button type="button" className="lmsButton" data-toggle="modal" data-target="#withdrawModal"  *ngIf="leaves.status == 'consumption started'"  (click)="getLeaveData(leaves.leaveApplicationId,leaves.startDate,leaves.endDate,leaves.employeeCommentSubmission,leaves.leaveTypeName,leaves.noOfDays,leaves.userId)">Withdraw</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="modal fade" id="myModal1" role="dialog">
+      <div class="modal-dialog">
+
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" (click)="modalClose()" data-dismiss="modal" #closeBtn2>&times;</button>
+            <h4 class="modal-title">Edit Leave</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row larow">
+              <div class="col-md-4">
+                <span>Leave Type</span>
+              </div>
+              <div class="col-md-8">
+                 <select class="leave" [(ngModel)]="selectedItems1">
+  <option *ngFor="let c of dropdownList1" [ngValue]="c">{{c.itemName}}</option>
+</select>
+                <!-- <angular2-multiselect name="dropdown" [data]="dropdownList1" [(ngModel)]="selectedItems1" [settings]="dropdownSettings1"
+                  (onSelect)="onItemSelect2($event)" (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)"
+                  (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect> -->
+              </div>
+            </div>
+
+
+            <div class="row larow">
+              <div class="col-md-4">
+
+                <span>Date</span>
+
+              </div>
+              <div class="col-md-8">
+
+
+                <input class="lsInput" [owlDateTimeTrigger]="dt11" [owlDateTimeFilter]="myFilter" [owlDateTime]="dt11" [selectMode]="'range'"
+                  [min]="" placeholder="MM-DD-YYYY"  [(ngModel)]="editMoments" (dateTimeChange)="changeDate1(editMoments)">
+                <owl-date-time [pickerType]="" #dt11></owl-date-time>
+
+                 <!-- <input class="lsInput" [owlDateTimeTrigger]="dt10" [owlDateTimeFilter]="myFilter" [owlDateTime]="dt10" [selectMode]="'range'"
+                  [min]="" placeholder="MM-DD-YYYY" [formControl]="selectedMoment2"  (dateTimeChange)="changeDate(selectedMoment2)">
+                <owl-date-time [pickerType]="" #dt10></owl-date-time> -->
+
+
+                <!-- <ng-datepicker name="date" [(ngModel)]="date"></ng-datepicker> -->
+
+
+              </div>
+            </div>
+
+
+            <div class="row larow">
+              <div class="col-md-4">
+
+                <span>Total No of Days</span>
+
+              </div>
+              <div class="col-md-8">
+
+
+
+                  <span *ngIf="showHoliday == false">{{noOfDays}}</span>
+                 <span *ngIf="showHoliday == true">{{noOfDays-this.holidayList1.length}}</span> 
+
+
+              </div>
+            </div>
+            <div class="row larow">
+              <div class="col-md-4">
+                <span>Manager </span>
+
+              </div>
+              <div class="col-md-8">
+
+
+                <span>{{manager}}</span>
+
+
+
+              </div>
+            </div>
+            <div class="row larow textarearow">
+              <div class="col-md-4">
+
+                <span>Comments</span>
+              </div>
+              <div class="col-md-8">
+           
+
+                <textarea type="text" name="comments" class="lsInput" [(ngModel)]="comments"></textarea>
+
+
+
+              </div>
+            </div>
+            <div class="row">
+              <input type="button" value="Submit"  (click)="editLeave()" class="buttonClass text-center lsbutton" data-toggle="modal" data-target="#myModal5" />
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="myModal5" role="dialog" *ngIf="this.availableDays1<this.noOfDays">
+      
+        <div class="modal-dialog">
+          <div class="modal-content configModal">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" #closeBtn3>&times;</button>
+              <h5 class="modal-title">Lop</h5>
+            </div>
+            <div class="modal-body">
+               <p>Your available leaves are lesser than your applied leaves.Hence there would be loss of pay for remaining days.Do you wish to continue ?</p>
+               <div class="row">
+                      <div class="col-md-12">
+                          <div style="text-align:center">
+                              <button type="submit"  (click)="editLeave1()">Submit</button>
+                            </div>
+                      </div>
+                   </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="withdrawModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content configModal">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" #closeBtn6>&times;</button>
+              <h5 class="modal-title">Withdraw Leave</h5>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+              <div class="col-md-4">
+                <span>Comments</span>
+              </div>
+              <div class="col-md-8">
+                <textarea type="text" name="comments" [(ngModel)]="comments2"></textarea>
+              </div>
+
+              <input type="button" value="Submit" class="buttonClass" #submitButton4 (click)="withdrawLeave()" />
+            </div>
+
+               
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" #closeBtn1>&times;</button>
+            <h4 class="modal-title">Cancel Leave</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-4">
+                <span>Comments</span>
+              </div>
+              <div class="col-md-8">
+                <textarea type="text" name="comments" [(ngModel)]="comments1"></textarea>
+              </div>
+
+              <input type="button" value="Submit" #submitButton3 class="buttonClass" (click)="cancelLeave()" />
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </tab>
+  <tab heading="Policy View" id="policyViewTab">
+    <br/><br/>
+    <div class="row">
+      <div class="col-md-1">
+      </div>
+
+      <div class="col-md-6">
+        <div class="policyViewOuter">
+          <h4>Policy View:</h4>
+          <div class="row">
+            <div class="col-md-4 rowHeadings">Policy name:</div>
+            <div class="col-md-8">{{showPolicy.policyName}}</div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 rowHeadings">Policy year:</div>
+            <div class="col-md-8">{{showPolicy.policyYear}}</div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 rowHeadings">Timeline</div>
+            <div class="col-md-8">{{showPolicy.leavePolicyType}}</div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 rowHeadings">Leave Details</div>
+            <div class="col-md-8">
+              <table>
+                <tr>
+                  <th>Leave Type</th>
+                  <th>No of Days</th>
+                  <th>Carry forward Allowed</th>
+                </tr>
+                <tr *ngFor="let data of showPolicy.policyDetailMasterResponses">
+                  <td>{{data.leavetypeName}}</td>
+                  <td>{{data.totalNoOfDays}}</td>
+                  <td>
+                    <span *ngIf="data.carryForwardAllowed==true"><i class="fa fa-check"></i></span>
+                    <span *ngIf="data.carryForwardAllowed==false"><i class="fa fa-times"></i></span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 holiday"> 
+        <div class="policyViewOuter">
+          <h4>Holiday List:</h4>
+          <div class="row">
+            <table class="holidayTable">
+              <tr>
+                <th>Date</th>
+                <th>Holiday Name</th>
+              </tr>
+              <tr *ngFor="let holiday of fullHolidayList">
+                <td>{{holiday.date}}</td>
+                <td>{{holiday.name}}</td>
+              </tr>
+            </table>
+            <br/>
+          </div>
+            </div>
+      </div>
+     
+       <!-- <div class="col-md-3">
+      </div>
+        <div class="col-md-6">
+           <br/>
+            <div class="policyViewOuter">
+          <h4>Holiday List:</h4>
+          <div class="row">
+            <table class="nomargin">
+              <tr>
+                <th>Date</th>
+                <th>Holiday Name</th>
+              </tr>
+              <tr *ngFor="let holiday of holidayList">
+                <td>{{holiday.date}}</td>
+                <td>{{holiday.name}}</td>
+              </tr>
+            </table>
+            <br/>
+          </div>
+            </div>
+      </div>
+         <div class="col-md-3">
+      </div> -->
+    </div>
+  </tab>
+  <tab heading="Leave History">
+    <div id="smartTable">
+      <ng2-smart-table [settings]="historySettings" [source]="historyData"></ng2-smart-table>
+    </div>
+  </tab>
+</tabset>
+
+

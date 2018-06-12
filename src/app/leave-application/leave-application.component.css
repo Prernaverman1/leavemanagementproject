@@ -1,0 +1,108 @@
+.lmsRowHeader{
+    font-family: 'gothanRounded-bold';
+    font-size: 16px;
+    padding: 20px 0;
+    border-bottom: 4px solid #ddd;
+  }
+  .lmsRowContent{
+    font-family: 'gothanRounded-book';
+    font-size: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+    align-items: center;
+  }
+  .leaveInfo button{
+    padding: 2px 11px;
+    background-color: #613e95;
+    color: #fff;
+    border: 1px solid grey;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    font-family: "gothanRounded-book";
+  }
+  .leaveInfo .row{
+      margin-left: 0px;
+      margin-right: 0px;
+  }
+  .leaveInfo .lmsRowContent{
+    font-size: 14px;
+    padding: 13px 0;
+  }
+
+  .buttonClass {
+    margin: 0 auto;
+  }
+
+  .leave {
+    width: 228px;
+    height: 29px;
+    border-radius: 5px;
+  }
+
+  /* leave list table */
+table{
+  border-collapse: collapse;
+  width: 100%;
+  /* height: 139px; */
+  border: 1px solid;
+  margin-top: 12%;
+ }
+ th,td{
+  border: 1px solid;
+  padding-left: 12px;
+ }
+
+
+ #policyViewTab .row{
+    margin: 2px;
+  }
+  #policyViewTab .col-md-8{
+    font-size: 14px;
+    padding: 7px 8px;
+  }
+  #policyViewTab .rowHeadings{
+    font-weight: bold;
+    font-size: 16px;
+  }
+  #policyViewTab h4{
+    margin: 0px;
+    font-size: 16px;
+    padding: 10px;
+    font-family: 'montserrat-regular';
+    background-color: #613e95;
+    color: #fff;
+  }
+  #policyViewTab th,td{
+    border:1px solid;
+  }
+  #policyViewTab table{
+    width: 100%;
+    margin-top: 0px;
+  }
+#policyViewTab .policyViewOuter{
+  background-color: whitesmoke;
+}
+
+
+:host /deep/ #smartTable tr, #smartTable th {
+background-color: whitesmoke;
+ font-family: 'gothanRounded-book' !important;
+/* font-style: italic; */
+text-align:center;
+border: 1px solid black;
+width: 100%;
+height: 50px;
+}
+
+.holiday{
+  margin-bottom: 90px;
+}
+
+.nomargin1 {
+  padding-left: 45px;
+}
+
+
+
+

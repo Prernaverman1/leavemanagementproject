@@ -1,0 +1,28 @@
+[
+    {
+      "badgeId": "026",
+      "name": "abc",
+      "leaveType":"sickleave",
+      "dates":{
+        "from":1519217542,
+        "to":1519217542
+      },
+      "noOfDays":1,
+      "comments":"Having personal work",
+      "status":"status"
+      
+    },
+     {
+      "badgeId": "027",
+      "name": "xyz",
+      "leaveType":"earnleave",
+      "dates":{
+        "from":1519217542,
+        "to":1519217542
+      },
+      "noOfDays":1,
+      "comments":"I am not feeling well",
+      "status":"status"
+      
+    }
+  ]

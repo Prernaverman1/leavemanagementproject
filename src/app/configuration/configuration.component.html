@@ -1,0 +1,580 @@
+<div class="mainContent">
+  <tabset #staticTabs [justified]="true">
+    <tab heading="Leave Type">
+      <div class="row leaveRow">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div class="form-style-2 leavePolicy">
+            <h2>Leave Type</h2>
+            <form class="formClass" [formGroup]="leaveForm" #leaveButton (ngSubmit)="addLeave(leaveForm.value)">
+              <label for="field1"><span>Leave Name </span><input type="text" class="input-field" name="field1" value="" formControlName="name" placeholder="Enter Leave Name" /></label>
+              <!-- <label for="field2"><span>Enabled </span><input type="checkbox" formControlName="myValues"  value="" /></label> -->
+
+              <label style="text-align:center;"><input type="submit" value="Submit" class="buttonClass" /></label>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+      <hr />
+      <div id="smartTable">
+        <ng2-smart-table [settings]="settings" [source]="data" (edit)="onEdit($event)" (editConfirm)="onLeaveEdit($event)"></ng2-smart-table>
+      </div>
+    </tab>
+    <tab heading="Holiday">
+      <div class="row leaveRow">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div class="form-style-2 holidayPolicy">
+            <h2>Holiday List</h2>
+            <form class="formClass" [formGroup]="holidayForm" #holidayButton (ngSubmit)="addHoliday(holidayForm.value)">
+              <label for="field1"><span>Holiday Name</span><input type="text" class="input-field" name="field1" value="" formControlName="holiday" placeholder="Enter Holiday Name"/></label>
+              <label for="field2"><span>Date </span>
+              <input [owlDateTimeTrigger]="dt10"  formControlName="first" [(ngModel)]="first" [owlDateTime]="dt10"
+                     placeholder="Date" [owlDateTimeFilter]="myFilter">
+              <owl-date-time [pickerType]=""  #dt10></owl-date-time>
+          </label>
+
+<!-- 
+              <label for="field3"><span>Location </span>
+            <select class="holidayLoc" formControlName="location">
+                <option value="bangalore" [attr.selected]="true">Bangalore</option>
+                <option value="chennai">Chennai</option>
+              </select>
+          </label> -->
+              <!-- <label for="field2"><span>Enabled </span><input type="checkbox" formControlName="myValues"  value="" /></label> -->
+
+
+              <label style="text-align:center;"><input type="submit"  value="Submit" class="buttonClass" /></label>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+      <hr />
+      <div class="row" id="smartTable">
+        <ng2-smart-table [settings]="settings2" [source]="data2" (editConfirm)="onHolidayEdit($event)"></ng2-smart-table>
+      </div>
+    </tab>
+    <tab heading="Role">
+      <div class="row leaveRow">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div class="form-style-2 rolePolicy">
+            <h2>Roles Type</h2>
+            <form class="formClass" [formGroup]="roleForm" #roleButton (ngSubmit)="addRole(roleForm.value)">
+              <label for="field1"><span>Name </span><input type="text" class="input-field" name="field1" value="" formControlName="name"  placeholder="Enter Role"/></label>
+              <!-- <label for="field2"><span>Enabled </span><input type="checkbox" formControlName="myValues"  value="Y" /></label> -->
+
+              <label style="text-align:center;"><input type="submit" value="Submit" class="buttonClass" /></label>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+      <hr />
+      <div id="smartTable">
+        <ng2-smart-table [settings]="role" [source]="data1" (editConfirm)="onRoleEdit($event)"></ng2-smart-table>
+      </div>
+
+    </tab>
+    <tab heading="Policy">
+      <div class="createPolicy">
+        <h2>Create New Policy</h2>
+        <div>
+          <label for="">Name </label>
+          <input type="text" [(ngModel)]="nameVal" class="modelTitle inputBg policyName" placeholder="Enter the name of policy">
+        </div>
+        <div>
+          <label for="">Year </label>
+          <input type="number" [(ngModel)]="yearVal" maxlength="4" minlength="0" class="modelTitle inputBg" placeholder="YYYY">
+        </div>
+        <div>
+          <label for="">Time Line </label>
+          <select [(ngModel)]="timeLine">
+                    <option value="Monthly" [attr.selected]="true">Monthly</option>
+                    <option value="Quarterly">Quarterly</option>
+                  </select>
+        </div>
+        <div>
+          <label for="">Leave Type</label>
+          <!-- <select>
+                            <option value="1">Sick Leave</option>
+                            <option value="2">Earned Leave</option>
+                          </select> -->
+          <angular2-multiselect [data]="dropdownList1" [(ngModel)]="selectedItems1" [settings]="dropdownSettings1" (onSelect)="onItemSelect1($event)"
+            (onDeSelect)="OnItemDeSelect1($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+        </div>
+        <div *ngFor="let selectedItems of selectedItems1;let i=index" class="row">
+            <div class="col-lg-3 col-md-3 paddingzero">
+          <label for="">{{selectedItems.name}}</label>
+          </div>
+          <div class="col-lg-3 col-md-3 paddingzero">
+          <input type="number" [(ngModel)]="selectedItems.totalNoOfDays" maxlength="4" minlength="0" class="modelTitle inputBg" placeholder="Enter number of leaves">
+          </div>
+          <div class="col-lg-4 col-md-4 paddingzero">
+          <label for="" class="carryForward--text">Carry Forward</label>
+          </div>
+          <div class="col-lg-1 col-md-1 paddingzero">
+          <input type="checkbox" class="carryForward--checkbox sickLeaveCheck" [checked]="selectedItems.id==false" (change)="checkboxChange($event.target.checked,i)">
+        </div>
+        </div>
+
+        <!-- <div>
+          <label for="">Enabled </label>
+          <input type="checkbox" [checked]="policyEnabled" (change)="policyenable()">
+        </div> -->
+        <!-- <div>
+                  <label for="">Role</label>
+                    <angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" 
+    [settings]="dropdownSettings" 
+    (onSelect)="onItemSelect($event)" 
+    (onDeSelect)="OnItemDeSelect($event)"
+    (onSelectAll)="onSelectAll($event)"
+    (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+                </div> -->
+        <div style="text-align:center">
+          <button type="submit" #policyButton (click)="savePolicy()">Submit</button>
+        </div>
+      </div>
+      <hr />
+      <div class="wbMain">
+          <!-- <div [hidden]="showLoading"><i class="fa fa-spinner fa-spin"></i></div> -->
+        <div class="row wbMain-rowhead">
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 wbMain-rowVal">Policy Year</div>
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 wbMain-rowVal">Policy Name</div>
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 wbMain-rowVal">Leave Policy Type</div>
+          <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 wbMain-rowVal">Enabled</div>
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 wbMain-rowVal">Created By</div>
+           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 wbMain-rowVal">Actions</div>
+          <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+        </div>
+        <div class="batchList">
+          <div class="row wbMain-row wbMain-row1"  *ngFor="let policy of DataPolicy;let i=index">
+            <div class="batchlist__wrap" [class.wbMain-rowValActive]="testObject['show_'+i]==false">
+              <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{policy.policyYear}}</div>
+              <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{policy.policyName}}</div>
+              <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{policy.leavePolicyType}}</div>
+              <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">{{policy.enabled}}</div>
+              <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{policy.createdBy}}</div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                  <button *ngIf="policy.enabled == false " class="button" (click)="policyDelete(policy.policyId)" >Delete</button>
+                </div>
+              <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                <i class="fa fa-plus expandButton cursorPointer batchName" aria-hidden="true" (click)="expand(i)" *ngIf="testObject['show_'+i]"></i>
+                <i class="fa fa-minus expandButton cursorPointer batchName" aria-hidden="true" (click)="shrink(i)" *ngIf="!testObject['show_'+i]"></i> 
+              </div>
+            </div>
+      
+      
+            <div class="paddingzero col-lg-12 col-md-12 col-sm-12 col-xs-12 policyRow" [hidden]="testObject['show_'+i]">
+              <div class="row wbMain-Insiderow">
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 wbMain-Insiderow1 paddingzero" *ngFor="let policy1 of policy.policyDetailMasterResponses;let index1=index" [hidden]="testObject['show_'+i]">{{policy1.leavetypeName}}</div>
+                  
+                  <!-- <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{TestCasesId}}</div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{TestCasesId}}</div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{TestCasesId}}</div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">{{TestCasesId}}</div> -->
+               
+              </div>
+              <div class="row marginzero wbMain-Insiderow">
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 valueDiv" *ngFor="let policy1 of policy.policyDetailMasterResponses;let index1=index" [hidden]="testObject['show_'+i]">{{policy1.totalNoOfDays}}</div>
+              </div>
+            </div>
+      
+      
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row" id="smartTable">
+        <ng2-smart-table [settings]="settingsPolicy" [source]="DataPolicy" (editConfirm)="onEditingPolicy($event)"></ng2-smart-table>
+      </div> -->
+
+    </tab>
+    <!-- <tab heading="Configure Role">
+      <div class="row leaveRow">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="form-style-2 roleConfig">
+            <h2>Configure Roles</h2>
+            <form class="formClass">
+              <div class="outer">
+                <div class="empListConfig">
+                  <label for="">Employee list</label>
+                  <angular2-multiselect name="employeeDropdown" [data]="employeeDropdownList" [(ngModel)]="employeeSelectedItems" [settings]="employeeDropdownSettings"
+                    (onSelect)="onEmployeeSelect($event)" (onDeSelect)="OnEmployeeDeSelect($event)" (onSelectAll)="onEmployeeSelectAll($event)"
+                    (onDeSelectAll)="onEmployeeDeSelectAll($event)"></angular2-multiselect>
+                </div>
+                <div class="roleListConfig">
+                  <label for="">Role list</label>
+                  <angular2-multiselect name="roleDropdown" [data]="roleDropdownList" [(ngModel)]="roleSelectedItems" [settings]="roleDropdownSettings"
+                    (onSelect)="onRoleItemSelect($event)" (onDeSelect)="OnRoleItemDeSelect($event)" (onSelectAll)="onRoleSelectAll($event)"
+                    (onDeSelectAll)="onRoleDeSelectAll($event)"></angular2-multiselect>
+                </div>
+              </div>
+              <label style="text-align:center;"><input type="submit" value="Save" class="buttonClass" /></label>
+            </form>
+          </div>
+
+          <hr />
+
+          <div class="form-style-2 roleConfig">
+            <h2>Employee Manager Mapping</h2>
+            <form class="formClass">
+              <div class="outer">
+                <div class="empListConfig">
+                  <label for="">Employee list</label>
+                  <select>
+                       <option value="Monthly" [attr.selected]="true">Monthly</option>
+                       <option value="Quaterly">Quaterly</option>
+                     </select>
+                </div>
+                <div class="roleListConfig">
+                  <label for="">Manager List</label>
+                  <select>
+                       <option value="Monthly" [attr.selected]="true">Monthly</option>
+                       <option value="Quaterly">Quaterly</option>
+                 </select>
+                </div>
+              </div>
+              <label style="text-align:center;"><input type="submit" value="Save" class="buttonClass" /></label>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-md-2"></div>
+      </div>
+
+    </tab> -->
+    <tab heading="Role & Manager Mapping">
+      <div class="row">
+            <div class="col-md-1">
+              <p style="margin-top:10px;">Search:</p>
+            </div>
+            <div class="col-md-3">
+                <input class="form-control tableInput" type="text" name="search" [(ngModel)]="filter">   
+            </div>
+             <div class="col-md-5"></div>
+             <div class="col-md-2">
+             
+             </div>
+          </div>  
+        <!-- <div class="row">
+            <div class="col-md-1">
+              <p style="margin-top:10px;">Search</p>
+            </div>
+            <div class="col-md-4">
+                <input class="form-control tableInput" type="text" name="search" [(ngModel)]="filter">   
+            </div>
+             <div class="col-md-6"></div>
+          </div> -->
+      <div class="menuContent leaveInfo">
+        <div class="row text-center lmsRowHeader">
+          <div class="col-md-10">
+            <div class="row">
+              <div class="col-md-2">
+                Employee Name
+              </div>
+              <div class="col-md-2">
+               Badge Id
+              </div>
+              <div class="col-md-2">
+               Mobile No
+              </div>
+              <div class="col-md-2">
+               User Name
+              </div>
+              <div class="col-md-2">
+                  Role Name
+                </div>
+              <div class="col-md-2">
+               Reporting Manager
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div>
+              Actions
+            </div>
+          </div>
+        </div>
+
+        <div class="row text-center lmsRowContent" *ngFor="let leaves of employeeDetails1 | filter:filter">
+          <div class="col-md-10">
+            <div class="row">
+              <div class="col-md-2">
+                {{leaves.employeeName}}
+              </div>
+              <div class="col-md-2">
+                {{leaves.badgeNumber}}
+              </div>
+              <div class="col-md-2">
+                {{leaves.mobileNumber}}
+              </div>
+              <div class="col-md-2">
+               {{leaves.username}}
+              </div>
+              <div class="col-md-2">
+                  {{leaves.roleName}}
+                </div>
+              <div class="col-md-2">
+                {{leaves.reportingManagerName}}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            
+             
+            <div class="icons" style="margin-bottom:6px;">
+               <img src="assets/images/38-24.png" title="Map Role"  data-toggle="modal" (click)="getRoleData(leaves.employeeName,leaves.employeeId,leaves.reportingManagerEmployeeId,leaves.reportingManagerName,leaves.roleName,leaves.roleId)" data-target="#myModal" /> 
+               <img src="assets/images/x-16-24.png" title="Map Manager"  data-toggle="modal" (click)="getRoleData(leaves.employeeName,leaves.employeeId,leaves.reportingManagerEmployeeId,leaves.reportingManagerName,leaves.roleName,leaves.roleId)" data-target="#myModal2" /> 
+                <img src="assets/images/3608-24.png" title="Change password"  data-toggle="modal" (click)="getRoleData(leaves.employeeName,leaves.employeeId,leaves.reportingManagerEmployeeId,leaves.reportingManagerName,leaves.roleName,leaves.roleId,leaves.username)" data-target="#myModal3" /> 
+                <img src="assets/images/Cancel.png" title="Disable Employee" data-toggle="modal" (click)="getRoleData(leaves.employeeName,leaves.employeeId,leaves.reportingManagerEmployeeId,leaves.reportingManagerName,leaves.roleName,leaves.roleId,leaves.username)" data-target="#myModal4"/>
+               <!-- <button  type="button" className="lmsButton" data-toggle="modal" (click)="getRoleData(leaves.employeeName,leaves.employeeId,leaves.reportingManagerEmployeeId,leaves.reportingManagerName,leaves.roleName,leaves.roleId)" data-target="#myModal">Map Role</button>  -->
+              <!-- <button type="button" className="lmsButton" data-toggle="modal" (click)="getRoleData(leaves.employeeName,leaves.employeeId,leaves.reportingManagerEmployeeId,leaves.reportingManagerName,leaves.roleName,leaves.roleId)" data-target="#myModal2">Map Manager</button> -->
+              <!-- <button type="button" className="lmsButton" data-toggle="modal" (click)="getRoleData(leaves.employeeName,leaves.employeeId,leaves.reportingManagerEmployeeId,leaves.reportingManagerName,leaves.roleName,leaves.roleId,leaves.username)" data-target="#myModal3">Change Password</button> -->
+             
+              <!-- (click)="enableDisableButton(leaves.employeeId)" -->
+
+            </div>
+             <!-- <button type="button" class="lmsButton" data-toggle="modal" (click)="getRoleData(leaves.employeeName,leaves.employeeId,leaves.reportingManagerEmployeeId,leaves.reportingManagerName,leaves.roleName,leaves.roleId,leaves.username)" data-target="#myModal4" >Disable Employee</button> -->
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content configModal">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" #closeBtn>&times;</button>
+              <h5 class="modal-title">Role Configuration</h5>
+            </div>
+            <div class="modal-body">
+              <!-- <p>Some text in the modal.</p> -->
+              <form>
+                 <div class="row">
+                  <div class="col-md-6">
+                      Employee Name
+                  </div>
+                  <div class="col-md-6">
+                      Select Role
+                  </div>
+                 </div>
+                 <div class="row">
+                    <div class="col-md-6">
+                        {{employeeName}}
+                    </div>
+                    <div class="col-md-6">
+                        <!-- <select>
+                            <option value="Monthly" [attr.selected]="true">Monthly</option>
+                            <option value="Quaterly">Quaterly</option>
+                      </select> -->
+                      <angular2-multiselect name="roleDropdown" [data]="roleDropdown" [(ngModel)]="roleSelected" [settings]="roleSettings" (onSelect)="onItemSelect1($event)"
+                      (onDeSelect)="OnItemDeSelect1($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+                    </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-md-12">
+                          <div style="text-align:center">
+                              <button type="submit" (click)="changeRole()">Submit</button>
+                            </div>
+                      </div>
+                   </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="myModal2" role="dialog">
+         <div class="modal-dialog">
+           <div class="modal-content configModal">
+             <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" #closeBtn1>&times;</button>
+               <h5 class="modal-title">Manager Configuration</h5>
+             </div>
+             <div class="modal-body">
+               <!-- <p>Some text in the modal.</p> -->
+                  <div class="row">
+                   <div class="col-md-6">
+                       Employee Name
+                   </div>
+                   <div class="col-md-6">
+                       Select Manager
+                   </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-6">
+                        {{employeeName}}
+                     </div>
+                     <div class="col-md-6">
+                         <angular2-multiselect [data]="managerDropdownList" name="ManagerName" [(ngModel)]="managerSelected" [settings]="managerDropdownSettings" (onSelect)="onManagerSelect($event)"
+                         (onDeSelect)="OnManagerDeSelect($event)" (onSelectAll)="onManagerSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+                     </div>
+                    </div>
+                    <div class="row">
+                       <div class="col-md-12">
+                           <div style="text-align:center">
+                               <button type="submit" (click)="changeManager()">Submit</button>
+                             </div>
+                       </div>
+                    </div>
+             </div>
+           </div>
+         </div>
+       </div>
+
+       <div class="modal fade" id="myModal3" role="dialog">
+         <div class="modal-dialog">
+           <div class="modal-content configModal">
+             <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" #closeBtn2>&times;</button>
+               <h5 class="modal-title">Change Password</h5>
+             </div>
+             <div class="modal-body">
+               <!-- <p>Some text in the modal.</p> -->
+                  <div class="row">
+                   <div class="col-md-6">
+                       Change Password
+                   </div>
+                   <div class="col-md-6">
+                       <input type="text" [(ngModel)]="changepassword" class="modelTitle inputBg " placeholder="Change Password">
+                   </div>
+                  </div>
+                    <div class="row">
+                       <div class="col-md-12">
+                           <div style="text-align:center">
+                               <button type="submit" (click)="changePassword()">Submit</button>
+                             </div>
+                       </div>
+                    </div>
+             </div>
+           </div>
+         </div>
+       </div>
+
+       <div class="modal fade" id="myModal4" role="dialog">
+         <div class="modal-dialog">
+           <div class="modal-content configModal">
+             <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" #closeBtn3>&times;</button>
+               <h5 class="modal-title">Disable Employee</h5>
+             </div>
+             <div class="modal-body">
+               <!-- <p>Some text in the modal.</p> -->
+                  <div class="row">
+                     <p>If You Want To Permanentaly Disable The Employee.Then you continue?</p>
+                  </div>
+                    <div class="row">
+                       <div class="col-md-12">
+                           <div style="text-align:center">
+                               <button type="submit" (click)="enableDisableButton()">Submit</button>
+                             </div>
+                       </div>
+                    </div>
+             </div>
+           </div>
+         </div>
+       </div>
+
+
+
+    </tab>
+
+     <tab heading="Leave Report">
+          <div class="row">
+            <div class="col-md-1">
+              <p style="margin-top:10px;">Select Date:</p>
+            </div>
+            <div class="col-md-3">
+                <input class="lsInput" [owlDateTimeTrigger]="dt12" [owlDateTimeFilter]="myFilter1" [owlDateTime]="dt12" [selectMode]="'range'"
+        [min]="" placeholder="MM-DD-YYYY" name="edit" [(ngModel)]="myMoments1" (dateTimeChange)="changeDate1(myMoments1)"> 
+      <owl-date-time [pickerType]=" " #dt12></owl-date-time>
+            </div>
+             <div class="col-md-5"></div>
+             <div class="col-md-2">
+               <button (click)="exportToExcel($event)">Export</button>
+             </div>
+          </div>  
+      <div class="wbMain">
+        <!-- <div [hidden]="showLoading"><i class="fa fa-spinner fa-spin"></i></div> -->
+      <div class="row wbMain-rowhead">
+       <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 wbMain-rowVal">Employee Name</div>
+        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 wbMain-rowVal">Email Id</div>
+        <!-- <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 wbMain-rowVal">Mobile Number</div> -->
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 wbMain-rowVal">Role Name</div>
+        <!-- <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 wbMain-rowVal">Managers</div> -->
+        <div class="col-lg-2 col-md-1 col-sm-1 col-xs-1" *ngFor="let items of employeeSubdetails">
+          {{items}} (Cr-Co-Av-Ap-Ao)
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">LOP</div>
+        <!-- <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div> -->
+      </div>
+      <div class="batchList">
+        <div class="row wbMain-row wbMain-row1"  *ngFor="let EmployeeDetails of employeeLeaveDetails |filter:filter;let i=index">
+          <div class="batchlist__wrap" [class.wbMain-rowValActive]="testObject1['show_'+i]==false">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{EmployeeDetails.employeeName}}</div>
+            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">{{EmployeeDetails.emailId}}</div>
+            <!-- <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{EmployeeDetails.mobileNumber}}</div> -->
+            <!-- <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{EmployeeDetails.reportingManagerName}}</div> -->
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{EmployeeDetails.roleName}}</div> 
+             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" *ngFor="let head of EmployeeDetails.leaveDetailsResponses">
+               <span *ngIf="head.available<0">{{head.credited | number}}-{{head.consumed | number}}-0-{{head.applied | number}}-{{head.approved | number}}</span>
+               <span *ngIf="head.available >= 0">{{head.credited | number}}-{{head.consumed | number}}-{{head.available | number}}-{{head.applied | number}}-{{head.approved | number}}</span>
+              </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" >
+              {{EmployeeDetails.LOPVal}}
+            </div>
+                       <!-- <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+              <i class="fa fa-plus expandButton cursorPointer batchName" aria-hidden="true" (click)="expand(i)" *ngIf="testObject1['show_'+i]"></i>
+              <i class="fa fa-minus expandButton cursorPointer batchName" aria-hidden="true" (click)="shrink(i)" *ngIf="!testObject1['show_'+i]"></i> 
+            </div> -->
+          </div>
+    
+    
+          <div class="paddingzero col-lg-12 col-md-12 col-sm-12 col-xs-12 policyRow" [hidden]="testObject1['show_'+i]">
+            <div class="row wbMain-Insiderow">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 wbMain-Insiderow1 paddingzero" *ngFor="let EmployeeDetails1 of employeeLeaveDetails.leaveBalanceResponses;let index1=index" [hidden]="testObject1['show_'+i]">{{EmployeeDetails1.leaveType}}
+                  <div class="row lbRow">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddingzero">
+                      Leave Balance
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddingzero borderLeft">
+                        Leave Balance from prev Year
+                    </div>
+
+                  </div>
+                </div>
+               
+             
+            </div>
+            <div class="row marginzero wbMain-Insiderow">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 valueDiv paddingzero" *ngFor="let EmployeeDetails1 of employeeLeaveDetails.leaveBalanceResponses;let index1=index" [hidden]="testObject1['show_'+i]">
+                  <div class="row lbValue">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                      {{EmployeeDetails1.leavebalance}}
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 borderLeft">
+                      {{EmployeeDetails1.leavebalanceFromPreviousYear}}
+                    </div>
+
+                  </div>
+                </div>
+            </div>
+          </div>
+    
+    
+        </div>
+      </div>
+    </div>
+
+    <div class="row footerRow text-right">Cr-Credited, Co-Consumed, Av-Available, Ap-Applied, Ao-Approved</div>
+
+     </tab>
+
+  </tabset>
+</div>

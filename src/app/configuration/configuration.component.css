@@ -1,0 +1,316 @@
+.form-style-2{
+    max-width: 533px;
+    /* padding: 20px 12px 10px 20px; */
+    padding-bottom: 10px;
+    font: 13px Arial, Helvetica, sans-serif;
+    background-color: whitesmoke;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+.form-style-2-heading{
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 20px;
+    font-size: 16px;
+    padding-bottom: 3px;
+    background-color: #613e95;
+    text-align: center;
+    height: 27px;
+    padding-top: 2px;
+    color:white; 
+}
+.form-style-2 label{
+    display: block;
+    margin: 15px 0px 15px 0px;
+}
+.form-style-2 label > span{
+    width: 100px;
+    /* font-weight: bold; */
+    float: left;
+    padding-top: 8px;
+    padding-right: 5px;
+    font-family: 'gothanRounded-book';
+}
+.form-style-2 span.required{
+    color:red;
+}
+.form-style-2 .tel-number-field{
+    width: 40px;
+    text-align: center;
+}
+.form-style-2 input.input-field{
+    width: 59%;
+    
+}
+
+.form-style-2 input.input-field, 
+.form-style-2 .tel-number-field, 
+.form-style-2 .textarea-field, 
+ .form-style-2 .select-field{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border: 1px solid #C2C2C2;
+    box-shadow: 1px 1px 4px #EBEBEB;
+    -moz-box-shadow: 1px 1px 4px #EBEBEB;
+    -webkit-box-shadow: 1px 1px 4px #EBEBEB;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    padding: 7px;
+    outline: none;
+}
+.form-style-2 .input-field:focus, 
+.form-style-2 .tel-number-field:focus, 
+.form-style-2 .textarea-field:focus,  
+.form-style-2 .select-field:focus{
+    border: 1px solid #0C0;
+}
+.form-style-2 .textarea-field{
+    height:100px;
+    width: 55%;
+}
+/* .form-style-2 input[type=submit],
+.form-style-2 input[type=button]{
+    border: none;
+    padding: 8px 15px 8px 15px;
+    background: #FF8500;
+    color: #fff;
+    box-shadow: 1px 1px 4px #DADADA;
+    -moz-box-shadow: 1px 1px 4px #DADADA;
+    -webkit-box-shadow: 1px 1px 4px #DADADA;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+.form-style-2 input[type=submit]:hover,
+.form-style-2 input[type=button]:hover{
+    background: #EA7B00;
+    color: #fff;
+} */
+
+
+
+ .formClass {
+     margin-left: 10px;
+ }
+
+.leaveRow {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+
+.formContainer{
+        width: 30%;
+    /* border: 1px solid black; */
+    margin-left: 4%;
+    margin-top: 1%;
+
+}
+
+.selectYear{
+   padding-top: 20px;
+}
+.submitHoliday{
+    text-align: center;
+}
+/* policy tab starts*/
+.createPolicy{
+    width: 455px;
+    margin: 30px auto;
+    border-radius: 4px;
+    background-color: whitesmoke;
+}
+.createPolicy h2{
+    margin: 0px;
+    font-size: 16px;
+    padding: 10px;
+    font-family: 'montserrat-regular';
+    background-color:#613e95;
+    color: #fff;
+}
+.createPolicy div{
+    padding: 10px 20px;
+}
+.createPolicy div label{
+    font-family: 'gothanRounded-book';
+    font-size: 14px;
+    width: 100px;
+}
+.createPolicy div input{
+    font-family: 'gothanRounded-book';
+    outline: none;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 67px;
+    font-size: 14px;
+}
+.createPolicy div select{
+    outline: none;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 310px;
+    font-size: 14px;
+
+}
+.createPolicy div:nth-last-child(3) input{
+ width: 100px;
+}
+.createPolicy div label.carryForward--text{
+    width: 105px;
+    margin-left: 30px;
+}
+.createPolicy div:nth-last-child(3) input[type=checkbox]{
+    width: 16px;
+}
+.createPolicy div:nth-last-child(4) input{
+    width: 67px;
+   }
+   .createPolicy div:nth-last-child(4) input[type=checkbox]{
+       width: 16px;
+   }
+/* policy tab ends */
+
+.leavePolicy h2{
+    margin: 0px;
+    font-size: 16px;
+    padding: 10px;
+    font-family: 'montserrat-regular';
+    background-color:#613e95;
+    color: #fff;
+}
+
+.holidayPolicy h2{
+    margin: 0px;
+    font-size: 16px;
+    padding: 10px;
+    font-family: 'montserrat-regular';
+    background-color:#613e95;
+    color: #fff;
+}
+
+.rolePolicy h2{
+    margin: 0px;
+    font-size: 16px;
+    padding: 10px;
+    font-family: 'montserrat-regular';
+    background-color:#613e95;
+    color: #fff;
+}
+
+.holidayLoc {
+    outline: none;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 310px;
+    font-size: 14px;
+}
+.sickLeaveCheck{
+    width:16px !important;
+}
+
+.policyName{
+    width:250px !important;
+}
+
+/* .empListConfig{
+    width:49%;
+    float:left;
+ }  
+.roleListConfig{
+    width:49%;
+    float: right;
+ }  
+.outer{
+     overflow: hidden;
+ }
+
+.outer label{
+    font-family: 'gothanRounded-book';
+    font-size: 14px;
+    width: 100px;
+}
+.roleConfig{
+    max-width: 719px;
+}
+
+.roleConfig h2{
+    margin: 0px;
+    font-size: 16px;
+    padding: 10px;
+    font-family: 'montserrat-regular';
+    background-color:#613e95;
+    color: #fff;
+} */
+
+
+
+
+.lmsRowHeader{
+    font-family: 'gothanRounded-bold';
+    font-size: 16px;
+    padding: 20px 0;
+    border-bottom: 4px solid #ddd;
+  }
+  .lmsRowContent{
+    font-family: 'gothanRounded-book';
+    font-size: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+    align-items: center;
+  }
+  .leaveInfo button{
+    padding: 2px 11px;
+    background-color: #613e95;
+    color: #fff;
+    border: 1px solid grey;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    font-family: "gothanRounded-book";
+  }
+  .leaveInfo .row{
+      margin-left: 0px;
+      margin-right: 0px;
+  }
+  .leaveInfo .lmsRowContent{
+    font-size: 14px;
+    padding: 13px 0;
+  }
+
+  .modal-header{
+      display: block;
+      background-color: #613e95;
+      color:white;
+  }
+ .row{
+     margin-top: 10px;
+ }
+
+ :host /deep/ #smartTable tr, #smartTable th {
+background-color: whitesmoke;
+text-align:center;
+border: 1px solid black;
+width: 100%;
+height: 50px;
+}
+
+
+
+.footerRow {
+    position: fixed;
+    left: 0; 
+    bottom: 0;
+    width: 100%;
+    height: 35px;
+    background: #613e95;
+    color:#fff;
+    text-align: right;
+    display: block;
+    z-index: 0;
+    padding: 5px 25px 0 0;
+}

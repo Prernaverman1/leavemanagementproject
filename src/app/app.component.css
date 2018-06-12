@@ -1,0 +1,193 @@
+@font-face {
+  font-family: 'gothanRounded-medium';
+  src: url("../assets/font/GothamRoundedMedium_21022.ttf");
+}
+@font-face {
+  font-family: 'gothanRounded-book';
+  src: url("../assets/font/gotham-rounded-book.otf");
+}
+@font-face {
+  font-family: 'montserrat-regular';
+  src: url("../assets/font/Montserrat-Regular.ttf");
+}
+/* @font-face {
+  font-family: 'andalemono';
+  src: url("./assets/font/AndaleMono.ttf");
+}
+@font-face {
+  font-family: 'montserrat-thin';
+  src: url("./assets/font/Montserrat-Thin.otf");
+} */
+@font-face {
+  font-family: 'gothanRounded-light';
+  src: url("../assets/font/gotham-rounded-light.otf");
+}
+@font-face {
+  font-family: 'gothanRounded-bold';
+  src: url("../assets/font/gotham-rounded-bold.otf");
+}
+*{		
+  outline: none;
+  word-wrap: break-word; 
+}
+a{
+  text-decoration: none;
+}
+.row{
+  margin: 0;
+}
+/* header starts */
+.header{
+  /* background-color:#613e95; */
+  background-color: white;
+  /* width:100%; */
+  color: #fff;
+  height: 50px;
+  padding:7px 30px 7px 20px;
+  position: static;		
+  z-index: 999;
+  display: flex;
+  border-bottom: 1px solid #f2f2f2;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px -7px 20px 2px black;
+}
+
+.header1{
+  /* background-color:#613e95; */
+  background-color: white;
+  /* width:100%; */
+  color: #fff;
+  height: 50px;
+  padding:7px 30px 7px 20px;
+  position: static;		
+  z-index: 999;
+  display: flex;
+  border-bottom: 1px solid #f2f2f2;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px -7px 20px 2px black;
+}
+/* header > img{
+  margin-right: 20px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+} */
+.menu{
+  width: 160px;
+  height: 40px; 
+}
+.gsd-heading{
+  font-family: 'gothanRounded-medium';
+  font-size: 20px;
+  vertical-align: middle;
+}
+.rightSpan{
+  color: black;
+}
+.userName{
+  font-family: 'montserrat-regular';
+  font-size: 11px;
+  margin:0px 12px;
+}
+/* header ends */
+.menuList{
+  width: 160px;
+  background-color: #613e95;
+  color: white;
+}
+.menuList li{
+  text-align: center;
+  text-transform: capitalize;
+}
+.menuTabs{
+  color:white;
+  text-decoration: none;
+  font-family: 'montserrat-regular';
+  padding: 10px;
+    display: block;
+    border-bottom: 1px solid white;
+}
+li {
+    list-style: none;
+}
+ul{
+  margin: 0 !important;
+  padding:0;
+}
+
+body{
+	background:#9accc8;
+	padding:25px;
+	width:90%;
+	margin:0 auto;
+	font-family:arial;
+}
+
+
+
+input[name=tabs]{
+	display:none;
+}
+
+input[name=tabs] + label{
+	padding:5px;
+	background:#00A886;
+	border-radius:5px;
+	color:white;
+	
+}
+
+input[name=tabs]:checked + label{
+	font-weight:bold;
+	border:solid 2px #fff;
+}
+
+.tab-content{
+	display:none;
+}
+
+#tab1:checked ~ #tab-content1, #tab2:checked ~ #tab-content2,  #tab3:checked ~ #tab-content3, #tab4:checked ~ #tab-content4, #tab5:checked ~ #tab-content5 {
+	display:block;
+}
+.app__all{
+  display: flex;
+}
+.sidebar{
+  background-color: #613e95;
+  height: 100%;
+  width: 160px;
+}
+.main-content{
+  width: calc(100% - 160px);
+}
+.menuList__tabs{
+  color: #fff;
+  font-family: 'montserrat-regular';
+  font-size:20px;
+}
+.menuList__tabs div{
+  padding: 10px;
+  border-bottom: 1px solid #fff;
+}
+.active div{
+  background-color: #371d5f;
+}
+.menuList__tabs--title{
+  font-size: 16px;
+  margin: 0px;
+}
+.glypIcon{
+  display: block;
+}
+
+.FBAllign{
+  width: 100%;
+}
+.FBBtn{
+  display: flex !important;
+    width: 100%;
+    justify-content: center !important;
+    padding-top: 20px;
+}
